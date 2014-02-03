@@ -10,14 +10,14 @@ module Devise
         if token = header_values[header_key]
           self.authentication_hash[mapping.to.token_authentication_key] = token
         else
-          false
+          super
         end
       end
 
       private
 
       def header_key
-        "HTTP_#{mapping.to.token_authentication_key.gsub('-', '_').upcase}"
+        "HTTP_#{mapping.to.token_authentication_key.to_s.gsub('-', '_').upcase}"
       end
 
       def header_values
